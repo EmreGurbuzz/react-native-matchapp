@@ -10,7 +10,7 @@ const Home = ({ navigation }) => {
             <View>
                 <View style={[styles.iconContainer, styles.itemShadow]}>
                     <Image style={styles.gameIcon} source={require('../assets/images/reactjs.png')} />
-                    <Image style={styles.gameIcon} source={require('../assets/images/vuejs.png')} />
+                    <Image style={styles.gameIcon} source={require('../assets/images/js.png')} />
                     <Image style={styles.gameIcon} source={require('../assets/images/python.png')} />
                     <Image style={styles.gameIcon} source={require('../assets/images/nodejs.png')} />
                 </View>
