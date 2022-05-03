@@ -2,30 +2,17 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const Home = ({ navigation }) => {
+const GameHistory = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={[styles.gameHeader, styles.itemShadow]}>Welcome to{"\n"}Matchapp</Text>
-            <View>
-                <View style={[styles.iconContainer, styles.itemShadow]}>
-                    <Image style={styles.gameIcon} source={require('../assets/images/reactjs.png')} />
-                    <Image style={styles.gameIcon} source={require('../assets/images/js.png')} />
-                    <Image style={styles.gameIcon} source={require('../assets/images/python.png')} />
-                    <Image style={styles.gameIcon} source={require('../assets/images/nodejs.png')} />
-                </View>
-            </View>
-            <TouchableOpacity onPress={()=>navigation.navigate("Game")} style={[styles.startButtonContainer, styles.itemShadow]}>
-                <Text style={styles.startButton}>Start Game</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate("GameHistory")} style={[styles.startButtonContainer, styles.itemShadow]}>
-                <Text style={styles.startButton}>Game History</Text>
-            </TouchableOpacity>
+            <Text style={[styles.gameHeader, styles.itemShadow]}>Point History</Text>
+            
         </SafeAreaView>
     )
 }
 
-export default Home
+export default GameHistory
 
 const styles = StyleSheet.create({
     container: {

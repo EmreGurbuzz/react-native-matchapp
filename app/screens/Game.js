@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, Modal, TouchableOpacity, Image, Dimensions } fr
 import React, { Component } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import GameCard from '../components/GameCard';
+import { MMKV } from 'react-native-mmkv';
+export const storage = new MMKV()
 
 const windowWidth = Dimensions.get('window').width;
 export class Game2 extends Component {
