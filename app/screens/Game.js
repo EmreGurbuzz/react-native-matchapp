@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, Modal, TouchableOpacity, Image, Dimensions } fr
 import React, { Component } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import GameCard from '../components/GameCard';
-import { MMKV } from 'react-native-mmkv';
+import { MMKV } from 'react-native-mmkv'
 export const storage = new MMKV()
+
 
 const windowWidth = Dimensions.get('window').width;
 export class Game2 extends Component {
@@ -35,6 +36,12 @@ export class Game2 extends Component {
         return array;
     }
     gameEnd() { 
+        if(storage.getString("point")){
+            storage.set("point",this.state.point.toString()+" "+storage.getString("point"))
+        }
+        else{
+            storage.set("point",this.state.point.toString())
+        }
         console.log("Game over")
         this.setState({ gameEnd: true })
         clearInterval(this.timer)
@@ -120,7 +127,6 @@ export class Game2 extends Component {
                     <View style={styles.gameEndPopup}>
                         <View style={styles.gameEndContainer}>
                             <Text style={styles.gameEndPoint}>Your Point : {this.state.point} </Text>
-                            <Text style={styles.gameEndPoint}>Best Point : {this.state.point} </Text>
                             <TouchableOpacity onPress={() => this.props.navigation.navigate("Home")} style={styles.logoutButton}>
                                 <Text style={styles.logoutText}>LOGOUT</Text>
                             </TouchableOpacity>

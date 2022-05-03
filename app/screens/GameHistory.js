@@ -1,15 +1,38 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import React, { Component } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { MMKV } from 'react-native-mmkv'
+export const storage = new MMKV()
 
-const GameHistory = ({ navigation }) => {
-
-    return (
-        <SafeAreaView style={styles.container}>
-            <Text style={[styles.gameHeader, styles.itemShadow]}>Point History</Text>
-            
-        </SafeAreaView>
-    )
+export class GameHistory extends Component {
+    state = {
+        points: [],
+        bestPoint: 0
+    }
+    componentDidMount() {
+        points = storage.getString("point")?.split(" ");
+        this.setState({ points })
+        points.map(item =>
+            this.state.bestPoint < item && this.setState({ bestPoint: item })
+        )
+    }
+    render() {
+        console.log("gelen")
+        return (
+            <SafeAreaView style={styles.container}>
+                <Text style={[styles.gameHeader, styles.itemShadow]}>Point History</Text>
+                <Text>Best Point : {Math.max(this.state.bestPoint)} </Text>
+                <ScrollView style={{ alignSelf: 'center', paddingTop: '15%' }}>
+                    {this.state.points?.map((item, index) =>
+                        item != "" && <Text>{index + 1}. Point :{item}</Text>
+                    )}
+                </ScrollView>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("Home")} style={styles.logoutButton}>
+                    <Text style={styles.logoutText}>LOGOUT</Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+        )
+    }
 }
 
 export default GameHistory
@@ -59,5 +82,15 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.36,
         shadowRadius: 5.14,
-    }
+    },
+    logoutButton: {
+        alignSelf: 'center',
+        marginBottom: '10%',
+        backgroundColor: '#42C2FF',
+        padding: 10,
+        borderRadius: 10
+    },
+    logoutText: {
+        color: 'black'
+    },
 })
